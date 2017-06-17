@@ -23,14 +23,20 @@ class Api::AddressesController < ApplicationController
     render json: res_obj
   end
 
-  # POST /addresses
+    # POST /addresses
   def create
-    @address = Address.new(params[:name]
+    @address = Address.new
+    @address.name = params["address"]
+    @address.get_details(params["address"])
+    res_obj = {}
 
     if @address.save
-      render json: @address, status: :created, location: @address
+      res_obj["status"] = "OK"
+      res_obj["address"] = @address
+      render json: res_obj, status: :created, location: api_address_url(@address)
     else
-      render json: @address, status: :unprocessable_entity
+      res_obj["status"] = "INVALID_REQUEST"
+      render json: res_obj, status: :unprocessable_entity
     end
   end
 
