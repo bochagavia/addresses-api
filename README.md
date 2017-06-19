@@ -34,10 +34,12 @@ rails server
 
 ## Usage
 
+Base url: https://addresses-api.herokuapp.com
+
 ### POST Address
 
 ```
-POST http://localhost:3000/api/addresses/
+POST /api/addresses/
 ```
 
 - Request:
@@ -58,7 +60,7 @@ POST http://localhost:3000/api/addresses/
 ### GET Addresses/:id
 
 ```
-GET http://localhost:3000/api/addresses/:id
+GET /api/addresses/:id
 ```
 
 - Response:
@@ -73,7 +75,7 @@ GET http://localhost:3000/api/addresses/:id
 ### GET Addresses
 
 ```
-GET http://localhost:3000/api/addresses/
+GET /api/addresses/
 ```
 
 - Response:
