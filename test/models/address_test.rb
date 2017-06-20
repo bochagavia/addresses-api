@@ -11,6 +11,7 @@
 
 require 'test_helper'
 require 'net/http'
+require "uri"
 
 class AddressTest < ActiveSupport::TestCase
   # test "the truth" do
@@ -24,11 +25,18 @@ class AddressTest < ActiveSupport::TestCase
 
   test 'POST address' do
     uri = URI(@BASE_URI)
-    res = Net::HTTP.post_form(uri, string: 'alguna calle')
+    res = Net::HTTP.post_form(uri, {"address": 'santa maria 5678'})
     res_obj = JSON.parse(res.body)
     assert_equal(res_obj["status"],"OK")
     valid_id = res_obj["address"]["id"].to_i > 0
     assert_equal(valid_id,true)
+  end
+
+  test 'POST invalid address' do
+    uri = URI.parse(@BASE_URI)
+    res = Net::HTTP.post_form(uri, {"address": ""})
+    res_obj = JSON.parse(res.body)
+    assert_equal(res_obj["status"],"INVALID_REQUEST")
   end
 
   test 'GET all addresses' do
