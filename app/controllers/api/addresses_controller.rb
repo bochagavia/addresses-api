@@ -32,8 +32,14 @@ class Api::AddressesController < ApplicationController
 
     if @address.save
       res_obj["status"] = "OK"
-      res_obj["address"] = @address
-      render json: res_obj, status: :created, location: api_address_url(@address)
+      if @address.latitude == 0 && @address.longitude == 0
+        res_obj["address"] = "NOT_AVAILABLE_ADDRESS"
+        @address.destroy
+        render json: res_obj, status: :created, location: api_address_url(@address)
+      else 
+        res_obj["address"] = @address
+        render json: res_obj, status: :created, location: api_address_url(@address)
+      end
     else
       res_obj["status"] = "INVALID_REQUEST"
       render json: res_obj, status: :unprocessable_entity
