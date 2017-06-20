@@ -82,10 +82,15 @@ GET /api/addresses/
   - status
   - address: collection of addresses
 
-### Testing
+## Testing
 
 Run the tests with:
 
 ```sh
 rails test test/models/address_test.rb
 ```
+
+## Bibliography
+
+* API: [link](http://edgeguides.rubyonrails.org/api_app.html) 
+* PostgreSQL: [link](https://www.digitalocean.com/community/tutorials/how-to-setup-ruby-on-rails-with-postgres) 
