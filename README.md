@@ -1,24 +1,91 @@
-# README
+# Addresses API
+## Dependencies
+* Rails 5.0.2
+* Ruby 2.3.1
+* PG 0.18
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Development
 
-Things you may want to cover:
+Copy repository and install dependencies with:
 
-* Ruby version
+```sh
+bundle install
+```
 
-* System dependencies
+Start PostgreSQL server and initialize Database with:
 
-* Configuration
+```sh
+rake db:create
+rake db:migrate
+```
 
-* Database creation
+Set geocoding and geoelevation api keys
 
-* Database initialization
+```sh
+export GEOCODE_APIKEY = "your_geocode_apikey"
+export GEOELEVATION_APIKEY = "your_geoelevation_apikey"
+```
 
-* How to run the test suite
+Start server with
 
-* Services (job queues, cache servers, search engines, etc.)
+```sh
+rails server
+```
 
-* Deployment instructions
+## Usage
 
-* ...
+Base url: https://addresses-api.herokuapp.com
+
+### POST Address
+
+```
+POST /api/addresses/
+```
+
+- Request:
+  - Headers: 
+    - Content-Type: application/json
+  - Body:
+    - address: 
+  
+- Response:
+  - status: OK
+  - address: 
+    - id
+    - name
+    - latitude
+    - longitude
+    - elevation
+  
+### GET Addresses/:id
+
+```
+GET /api/addresses/:id
+```
+
+- Response:
+  - status
+  - address: 
+    - id
+    - name
+    - latitude
+    - longitude
+    - elevation
+    
+### GET Addresses
+
+```
+GET /api/addresses/
+```
+
+- Response:
+  - status
+  - address: collection of addresses
+
+### Testing
+
+Run the tests with:
+
+```sh
+rails test test/models/address_test.rb
+```
